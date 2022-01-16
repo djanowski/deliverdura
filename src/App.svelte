@@ -18,10 +18,3 @@
   <hr />
   <OrderDetails />
 </main>
-
-<style>
-  :global(body) {
-    font-size: 16px;
-    line-height: 22px;
-  }
-</style>
