@@ -84,7 +84,6 @@
   }
 
   h1 {
-    font-size: 16px;
     font-weight: normal;
     flex-grow: 1;
     line-height: 1;
