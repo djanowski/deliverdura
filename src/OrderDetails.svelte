@@ -25,7 +25,7 @@
   <label>
     Enviar a
     <br />
-    <input bind:value={$order.phone} type="tel" />
+    <input bind:value={$order.phone} type="tel" placeholder="1145678900" />
   </label>
 
   <br />

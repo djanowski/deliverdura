@@ -14,7 +14,7 @@ function createOrder() {
       const unit = order?.[id]?.unit ?? (product.unit || "kg");
       const count = order?.[id]?.count ?? 0;
       const step = unit === "kg" ? 0.5 : 1;
-      const newCount = Math.max(0, parseFloat(count) + step * value);
+      const newCount = Math.max(0, round(parseFloat(count) + step * value));
       return {
         ...order,
         [id]: {
@@ -26,6 +26,10 @@ function createOrder() {
     });
   }
 
+  function round(n) {
+    return parseFloat(Math.round(n * 2) / 2).toFixed(1);
+  }
+
   return {
     subscribe,
     increment: (id) => add(id, 1),
@@ -35,12 +39,12 @@ function createOrder() {
       update((order) => {
         const product = products.find((p) => p.id === id);
         const unitWeight = product.unitWeight;
-        const currentCount = order?.[id].count ?? 0;
+        const currentCount = order?.[id]?.count ?? 0;
         const currentUnit = order?.[id]?.unit ?? (product.unit || "kg");
         const newUnit = currentUnit === "kg" ? "unit" : "kg";
         const newCount =
           newUnit === "kg"
-            ? (currentCount * unitWeight).toFixed(1)
+            ? round(currentCount * unitWeight)
             : Math.round(currentCount / unitWeight);
 
         return {

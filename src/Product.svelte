@@ -14,16 +14,23 @@
   const decrement = () => order.decrement(id);
   const toggleUnit = () => order.toggleUnit(id);
 
-  $: count = $order[id]?.count ?? 0;
   $: unit = $order[id]?.unit ?? (unit || "kg");
+  $: count = $order[id]?.count ?? 0;
+  $: selected = count > 0;
 </script>
 
 <div class="item">
   <h1>{emoji} {name}</h1>
-  <div class="count">{count}</div>
-  <button class="unit" on:click={toggleUnit}
-    >{unit === "kg" ? "kg" : "u"}</button
-  >
+  {#if selected}
+    <button class="count" on:click={toggleUnit}>
+      <div class="number">
+        {unit === "kg" ? parseFloat(count).toFixed(1) : count}
+      </div>
+      <div class="unit">
+        {unit === "kg" ? "kg" : "u"}
+      </div></button
+    >
+  {/if}
   <button on:click={increment}><PlusIcon /></button>
   <button on:click={decrement}><MinusIcon /></button>
 </div>
@@ -57,15 +64,21 @@
     fill: #e900ff;
   }
 
-  .unit {
-    width: 2.4em;
+  .count {
+    width: auto;
+    border-radius: 0.2em;
+    line-height: 1.8em;
   }
 
-  .count {
-    width: 30px;
+  .number {
+    width: 1.8em;
     text-align: right;
     font-feature-settings: "tnum";
     font-variant-numeric: tabular-nums;
+  }
+
+  .unit {
+    width: 1.5em;
   }
 
   h1 {

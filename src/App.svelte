@@ -9,7 +9,7 @@
 
   export let products;
 
-  let expanded = true;
+  let expanded = false;
   function toggleExpanded() {
     expanded = !expanded;
   }
@@ -95,5 +95,6 @@
   }
 
   .bottom {
+    padding: 0 0 1em 0;
   }
 </style>
