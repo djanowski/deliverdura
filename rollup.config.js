@@ -5,6 +5,7 @@ import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
 import { svelteSVG } from "rollup-plugin-svelte-svg";
+import { generateSW } from "rollup-plugin-workbox";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -77,6 +78,26 @@ export default {
     // If we're building for production (npm run build
     // instead of npm run dev), minify
     production && terser(),
+
+    generateSW({
+      swDest: "public/sw.js",
+      globDirectory: "public/",
+      globPatterns: ["**/*.{html,json,js,css}"],
+      skipWaiting: true,
+      clientsClaim: true,
+      runtimeCaching: [
+        {
+          urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+          handler: "CacheFirst",
+          options: {
+            cacheName: "images",
+            expiration: {
+              maxEntries: 10,
+            },
+          },
+        },
+      ],
+    }),
   ],
   watch: {
     clearScreen: false,
