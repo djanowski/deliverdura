@@ -44,7 +44,8 @@
 
 <style>
   :global(:root) {
-    --header-color: #5800ff;
+    --header-color: #81b214;
+    --button-color: #f58634;
   }
 
   main {
@@ -96,5 +97,9 @@
 
   .bottom {
     padding: 0 0 1em 0;
+  }
+
+  :global(::placeholder) {
+    color: rgba(255, 255, 255, 0.4);
   }
 </style>

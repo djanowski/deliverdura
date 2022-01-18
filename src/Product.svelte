@@ -63,7 +63,7 @@
   button :global(svg) {
     width: 100%;
     height: 100%;
-    fill: #e900ff;
+    fill: var(--button-color);
   }
 
   .count {
