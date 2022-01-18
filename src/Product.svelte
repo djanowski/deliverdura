@@ -43,6 +43,8 @@
     line-height: 1;
 
     margin: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #aaa;
   }
 
   button {
@@ -55,7 +57,7 @@
     align-items: center;
     justify-content: center;
     padding: 3px;
-    margin: 0;
+    margin: 0 0 0 5px;
   }
 
   button :global(svg) {
