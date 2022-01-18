@@ -2,6 +2,9 @@
   import { createEventDispatcher } from "svelte";
   import { order } from "./stores";
 
+  import PlusIcon from "./icons/plus.svg";
+  import MinusIcon from "./icons/minus.svg";
+
   export let id;
   export let name;
   export let emoji;
@@ -21,8 +24,8 @@
   <button class="unit" on:click={toggleUnit}
     >{unit === "kg" ? "kg" : "u"}</button
   >
-  <button on:click={increment}>+</button>
-  <button on:click={decrement}>-</button>
+  <button on:click={increment}><PlusIcon /></button>
+  <button on:click={decrement}><MinusIcon /></button>
 </div>
 
 <style>
@@ -31,10 +34,31 @@
     flex-wrap: nowrap;
     align-items: center;
     line-height: 1;
+
+    margin: 8px;
+  }
+
+  button {
+    background: transparent;
+    border-width: 0;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    margin: 0;
+  }
+
+  button :global(svg) {
+    width: 100%;
+    height: 100%;
+    fill: #e900ff;
   }
 
   .unit {
-    width: 35px;
+    width: 2.4em;
   }
 
   .count {
