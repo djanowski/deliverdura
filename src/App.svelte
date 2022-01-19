@@ -1,13 +1,13 @@
 <script>
-  import { slide } from "svelte/transition";
+  import { slide } from 'svelte/transition';
 
-  import Product from "./Product.svelte";
-  import Total from "./Total.svelte";
-  import OrderDetails from "./OrderDetails.svelte";
-  import WhatsappIcon from "./icons/whatsapp.svg";
-  import CloseIcon from "./icons/close.svg";
+  import Product from './Product.svelte';
+  import Total from './Total.svelte';
+  import OrderDetails from './OrderDetails.svelte';
+  import WhatsappIcon from './icons/whatsapp.svg';
+  import CloseIcon from './icons/close.svg';
 
-  export let products;
+  import { products } from './products';
 
   let expanded = false;
   function toggleExpanded() {
@@ -22,7 +22,10 @@
         <Total />
       </div>
       <div class="right">
-        <button class="expand" on:click={toggleExpanded}
+        <button
+          class="expand"
+          on:click={toggleExpanded}
+          aria-label="Finalizar pedido"
           >{#if expanded}<CloseIcon />{:else}<WhatsappIcon />{/if}</button
         >
       </div>
@@ -37,7 +40,12 @@
 
   <div class="bottom">
     {#each products as product}
-      <Product {...product} />
+      <Product
+        id={product.id}
+        name={product.name}
+        emoji={product.emoji}
+        unit={product.unit}
+      />
     {/each}
   </div>
 </main>

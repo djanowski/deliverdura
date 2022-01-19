@@ -1,25 +1,48 @@
 {
-  "name": "svelte-app",
+  "name": "deliverdura",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --no-clear"
+    "start": "sirv public --no-clear",
+    "test": "rollup -c rollup.test.config.js && mocha -b build/bundle-tests.js"
+  },
+  "mocha": {
+    "require": [
+      "svelte-test-register",
+      "global-jsdom/register"
+    ]
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-multi-entry": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
+    "@testing-library/svelte": "^3.0.3",
+    "@testing-library/user-event": "^14.0.0-beta.8",
+    "global-jsdom": "^8.4.0",
+    "jsdom": "^19.0.0",
+    "mocha": "^9.1.4",
     "prettier": "^2.5.1",
     "prettier-plugin-svelte": "^2.6.0",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-svelte-svg": "^1.0.0-beta.6",
     "rollup-plugin-terser": "^7.0.0",
     "rollup-plugin-workbox": "^6.2.0",
-    "svelte": "^3.0.0"
+    "svelte": "^3.0.0",
+    "svelte-test-register": "^0.1.0"
   },
   "dependencies": {
     "sirv-cli": "^2.0.0",

@@ -1,23 +1,32 @@
 <script>
-  import { order } from "./stores";
-  import { orderTotals } from "./stores";
-  import WhatsappIcon from "./icons/whatsapp.svg";
+  import { order } from './stores';
+  import { orderTotals } from './stores';
+  import WhatsappIcon from './icons/whatsapp.svg';
 
   function send() {
     const phoneNumber = `54${$order.phone}`;
     const itemsText = $orderTotals.items
       .map(
         (item) =>
-          `${item.count} ${item.unit === "kg" ? "kg" : "unidad"} ${
+          `${item.count} ${item.unit === 'kg' ? 'kg' : 'unidad'} ${
             item.product.name
           }`
       )
-      .join("\n");
-    const text = `${itemsText}\n\n${$order.notes || ""}`.trim();
+      .join('\n');
+    const text = `${itemsText}\n\n${$order.notes || ''}`.trim();
     const whatsappURL = new URL(`https://api.whatsapp.com/send`);
-    whatsappURL.searchParams.set("phone", phoneNumber || "");
-    whatsappURL.searchParams.set("text", text || "");
+    whatsappURL.searchParams.set('phone', phoneNumber || '');
+    whatsappURL.searchParams.set('text', text || '');
     window.open(whatsappURL);
+  }
+
+  function formatPhone(event) {
+    const { target } = event;
+    const match = target.value.trim().match(/15(\d{8})/);
+    if (match) {
+      const fixed = `11${match[1]}`;
+      $order.phone = fixed;
+    }
   }
 </script>
 
@@ -25,7 +34,12 @@
   <label>
     Enviar a
     <br />
-    <input bind:value={$order.phone} type="tel" placeholder="1145678900" />
+    <input
+      on:blur={formatPhone}
+      bind:value={$order.phone}
+      type="tel"
+      placeholder="1145678900"
+    />
   </label>
 
   <br />
