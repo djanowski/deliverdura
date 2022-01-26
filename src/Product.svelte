@@ -31,8 +31,8 @@
       </div></button
     >
   {/if}
-  <button on:click={increment}><PlusIcon /></button>
   <button on:click={decrement}><MinusIcon /></button>
+  <button on:click={increment}><PlusIcon /></button>
 </div>
 
 <style>
