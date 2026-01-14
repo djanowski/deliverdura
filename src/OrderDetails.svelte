@@ -30,56 +30,98 @@
   }
 </script>
 
-<div>
-  <label>
-    Enviar a
-    <br />
+<div class="form">
+  <div class="field">
+    <label for="phone">Teléfono</label>
     <input
+      id="phone"
       on:blur={formatPhone}
       bind:value={$order.phone}
       type="tel"
       placeholder="1145678900"
     />
-  </label>
+  </div>
 
-  <br />
-  <label>
-    Notas
-    <br />
-    <textarea bind:value={$order.notes} />
-  </label>
+  <div class="field">
+    <label for="notes">Notas (opcional)</label>
+    <textarea id="notes" bind:value={$order.notes} rows="3" placeholder="Indicaciones especiales..." />
+  </div>
 
-  <button on:click={send}>Enviar pedido <WhatsappIcon /></button>
+  <button class="send-btn" on:click={send}>
+    Enviar por WhatsApp
+    <WhatsappIcon />
+  </button>
 </div>
 
 <style>
-  input,
-  textarea {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid #fafafa;
-    border-radius: 5px;
-    color: #fff;
-
-    margin: 5px 0;
-
-    width: 100%;
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
   }
 
-  button {
-    background: var(--header-color);
-    border: 1px solid #fafafa;
-    border-radius: 5px;
-    color: #fff;
-    margin: 10px auto;
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
 
+  label {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+  }
+
+  input,
+  textarea {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    padding: var(--space-sm) var(--space-md);
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .send-btn {
+    background: #25d366;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: white;
+    padding: var(--space-md);
+    font-size: 1rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: var(--space-sm);
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    margin-top: var(--space-sm);
   }
 
-  button :global(svg) {
-    width: 24px;
-    height: 100%;
-    margin-left: 8px;
+  .send-btn:hover {
+    background: #1fb855;
+  }
+
+  .send-btn:active {
+    transform: scale(0.98);
+  }
+
+  .send-btn :global(svg) {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
   }
 </style>

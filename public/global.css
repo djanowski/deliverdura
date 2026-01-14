@@ -1,4 +1,44 @@
-/* https://colorhunt.co/palette/0000005800ffe900ffffc600 */
+:root {
+  /* Backgrounds */
+  --bg-primary: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-header: #ffffff;
+
+  /* Accents */
+  --accent-primary: #10b981;
+  --accent-primary-hover: #059669;
+  --accent-secondary: #6366f1;
+  --accent-muted: #e5e7eb;
+
+  /* Text */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+
+  /* Borders */
+  --border-color: #e5e7eb;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+}
 
 * {
   touch-action: manipulation;
@@ -12,17 +52,20 @@ body {
 }
 
 body {
-  color: #333;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font: -apple-system-body;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
-  color: rgb(0, 100, 200);
+  color: var(--accent-secondary);
   text-decoration: none;
 }
 
@@ -30,12 +73,11 @@ a:hover {
   text-decoration: underline;
 }
 
-a:visited {
-  color: rgb(0, 80, 160);
-}
-
 label {
   display: block;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: var(--space-xs);
 }
 
 input,
@@ -44,32 +86,43 @@ select,
 textarea {
   font-family: inherit;
   font-size: inherit;
-  -webkit-padding: 0.4em 0;
-  padding: 0.6em;
-  margin: 0 0 0.5em 0;
+  padding: 0.75em 1em;
+  margin: 0;
   box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 2px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
 input:disabled {
-  color: #ccc;
+  color: var(--text-muted);
+  background-color: var(--bg-primary);
 }
 
 button {
-  color: #333;
-  background-color: #f4f4f4;
+  color: var(--text-primary);
+  background-color: var(--bg-card);
   outline: none;
+  cursor: pointer;
 }
 
 button:disabled {
-  color: #999;
+  color: var(--text-muted);
+  cursor: not-allowed;
 }
 
 button:not(:disabled):active {
-  background-color: #ddd;
+  background-color: var(--accent-muted);
 }
 
-button:focus {
-  border-color: #666;
+::placeholder {
+  color: var(--text-muted);
 }

@@ -31,99 +31,138 @@
   $: selected = count > 0;
 </script>
 
-<div class="item">
-  <h1>
-    {emoji} {name}
+<div class="item" class:selected>
+  <span class="emoji">{emoji}</span>
+  <div class="info">
+    <span class="name">{name}</span>
     {#if seasonStatus}
       <span class="season-indicator {seasonStatus}"></span>
     {/if}
-  </h1>
+  </div>
   {#if selected}
     <button class="count" on:click={toggleUnit}>
-      <div class="number">
+      <span class="number">
         {unit === "kg" ? parseFloat(count).toFixed(1) : count}
-      </div>
-      <div class="unit">
+      </span>
+      <span class="unit-label">
         {unit === "kg" ? "kg" : "u"}
-      </div></button
-    >
+      </span>
+    </button>
   {/if}
-  <button on:click={decrement}><MinusIcon /></button>
-  <button on:click={increment}><PlusIcon /></button>
+  <div class="actions">
+    <button class="action-btn" on:click={decrement} aria-label="Quitar"><MinusIcon /></button>
+    <button class="action-btn" on:click={increment} aria-label="Agregar"><PlusIcon /></button>
+  </div>
 </div>
 
 <style>
   .item {
     display: flex;
-    flex-wrap: nowrap;
     align-items: center;
-    line-height: 1;
-
-    margin: 8px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #aaa;
+    gap: var(--space-sm);
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    margin: var(--space-sm) var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    box-shadow: var(--shadow-sm);
   }
 
-  button {
-    background: transparent;
-    border-width: 0;
-    width: 2em;
-    height: 2em;
-    border-radius: 50%;
+  .emoji {
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+
+  .info {
+    flex-grow: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 3px;
-    margin: 0 0 0 5px;
+    gap: var(--space-sm);
   }
 
-  button :global(svg) {
-    width: 100%;
-    height: 100%;
-    fill: var(--button-color);
-  }
-
-  .count {
-    width: auto;
-    border-radius: 0.2em;
-    line-height: 1.8em;
-  }
-
-  .number {
-    width: 1.8em;
-    text-align: right;
-    font-feature-settings: "tnum";
-    font-variant-numeric: tabular-nums;
-  }
-
-  .unit {
-    width: 1.5em;
-  }
-
-  h1 {
-    font-weight: normal;
-    flex-grow: 1;
-    line-height: 1;
+  .name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
   }
 
   .season-indicator {
     display: inline-block;
     width: 8px;
     height: 8px;
-    border-radius: 50%;
-    margin-left: 4px;
-    vertical-align: middle;
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
   }
 
   .in-season {
-    background-color: #4caf50;
+    background-color: #10b981;
   }
 
   .transitional {
-    background-color: #ffc107;
+    background-color: #f59e0b;
   }
 
   .out-of-season {
-    background-color: #f44336;
+    background-color: #ef4444;
+  }
+
+  .count {
+    display: flex;
+    align-items: center;
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: var(--space-xs) var(--space-sm);
+    font-weight: 600;
+    gap: 2px;
+  }
+
+  .number {
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+    min-width: 2em;
+    text-align: right;
+  }
+
+  .unit-label {
+    font-size: 0.75rem;
+    opacity: 0.9;
+  }
+
+  .actions {
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  .action-btn {
+    background: var(--accent-muted);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm);
+    transition: background var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .action-btn:hover {
+    background: var(--accent-primary);
+  }
+
+  .action-btn:hover :global(svg) {
+    fill: white;
+  }
+
+  .action-btn:active {
+    transform: scale(0.95);
+  }
+
+  .action-btn :global(svg) {
+    width: 16px;
+    height: 16px;
+    fill: var(--text-secondary);
+    transition: fill var(--transition-fast);
   }
 </style>

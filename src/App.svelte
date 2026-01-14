@@ -78,26 +78,24 @@
 </main>
 
 <style>
-  :global(:root) {
-    --header-color: #81b214;
-    --button-color: #f58634;
-  }
-
   main {
+    min-height: 100vh;
   }
 
   .top {
-    background: var(--header-color);
-    color: #fff;
+    background: var(--bg-header);
     position: sticky;
     top: 0;
+    z-index: 10;
+    box-shadow: var(--shadow-md);
   }
 
   .summary {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 10px;
+    padding: var(--space-md);
+    gap: var(--space-md);
   }
 
   .left {
@@ -106,37 +104,42 @@
 
   .right {
     display: flex;
-    gap: 8px;
+    gap: var(--space-sm);
   }
 
   .details {
-    padding: 10px;
+    padding: var(--space-md);
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
   }
 
   button.header-btn {
-    background: transparent;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    color: #fff;
-    width: 36px;
-    height: 36px;
+    background: var(--accent-muted);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    padding: var(--space-sm);
     margin: 0;
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  button.header-btn:hover {
+    background: var(--accent-primary);
+    color: white;
   }
 
   button.header-btn :global(svg) {
-    width: 100%;
-    height: 100%;
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
   }
 
   .bottom {
-    padding: 0 0 1em 0;
-  }
-
-  :global(::placeholder) {
-    color: rgba(255, 255, 255, 0.4);
+    padding: var(--space-sm) 0 var(--space-lg) 0;
   }
 </style>

@@ -20,30 +20,32 @@
 <style>
   .tabs {
     display: flex;
-    gap: 4px;
-    padding: 8px;
-    background: #f5f5f5;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: var(--bg-header);
+    border-bottom: 1px solid var(--border-color);
   }
 
   button {
     flex: 1;
-    padding: 8px 16px;
+    padding: var(--space-sm) var(--space-md);
     border: none;
     background: transparent;
-    border-radius: 6px;
-    font-size: 0.9em;
-    color: #666;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+    transition: background var(--transition-fast), color var(--transition-fast);
   }
 
   button:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--accent-muted);
+    color: var(--text-primary);
   }
 
   button.active {
-    background: var(--header-color);
+    background: var(--accent-primary);
     color: white;
-    font-weight: 500;
+    font-weight: 600;
   }
 </style>
