@@ -8,9 +8,10 @@
   import WhatsappIcon from './icons/whatsapp.svg';
   import CloseIcon from './icons/close.svg';
   import CopyIcon from './icons/copy.svg';
+  import TrashIcon from './icons/trash.svg';
 
   import { products } from './products';
-  import { orderTotals } from './stores';
+  import { order, orderTotals } from './stores';
 
   const TABS = ['todo', 'frutas', 'verduras'];
   let activeTab = 'todo';
@@ -34,6 +35,12 @@
       .join('\n');
     navigator.clipboard.writeText(text);
   }
+
+  function clearOrder() {
+    if (confirm('¿Limpiar el pedido?')) {
+      order.clear();
+    }
+  }
 </script>
 
 <main>
@@ -43,6 +50,9 @@
         <Total />
       </div>
       <div class="right">
+        <button class="header-btn" on:click={clearOrder} aria-label="Limpiar pedido">
+          <TrashIcon />
+        </button>
         <button class="header-btn" on:click={copyOrder} aria-label="Copiar pedido">
           <CopyIcon />
         </button>
@@ -128,9 +138,11 @@
     transition: background var(--transition-fast), color var(--transition-fast);
   }
 
-  button.header-btn:hover {
-    background: var(--accent-primary);
-    color: white;
+  @media (hover: hover) {
+    button.header-btn:hover {
+      background: var(--accent-primary);
+      color: white;
+    }
   }
 
   button.header-btn :global(svg) {

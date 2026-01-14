@@ -77,12 +77,16 @@
     display: flex;
     align-items: center;
     gap: var(--space-sm);
+    min-width: 0;
   }
 
   .name {
     font-size: 1rem;
     font-weight: 500;
     color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .season-indicator {
@@ -108,11 +112,13 @@
   .count {
     display: flex;
     align-items: center;
+    justify-content: center;
     background: var(--accent-primary);
     color: white;
     border: none;
     border-radius: var(--radius-sm);
-    padding: var(--space-xs) var(--space-sm);
+    padding: 0 var(--space-sm);
+    height: 36px;
     font-weight: 600;
     gap: 2px;
   }
@@ -120,8 +126,6 @@
   .number {
     font-feature-settings: "tnum";
     font-variant-numeric: tabular-nums;
-    min-width: 2em;
-    text-align: right;
   }
 
   .unit-label {
@@ -147,12 +151,14 @@
     transition: background var(--transition-fast), transform var(--transition-fast);
   }
 
-  .action-btn:hover {
-    background: var(--accent-primary);
-  }
+  @media (hover: hover) {
+    .action-btn:hover {
+      background: var(--accent-primary);
+    }
 
-  .action-btn:hover :global(svg) {
-    fill: white;
+    .action-btn:hover :global(svg) {
+      fill: white;
+    }
   }
 
   .action-btn:active {

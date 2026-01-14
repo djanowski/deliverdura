@@ -35,6 +35,9 @@ function createOrder() {
     increment: (id) => add(id, 1),
     decrement: (id) => add(id, -1),
     set,
+    clear() {
+      set({ phone: null, notes: null });
+    },
     toggleUnit(id) {
       update((order) => {
         const product = products.find((p) => p.id === id);
