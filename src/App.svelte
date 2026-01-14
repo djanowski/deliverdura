@@ -4,14 +4,35 @@
   import Product from './Product.svelte';
   import Total from './Total.svelte';
   import OrderDetails from './OrderDetails.svelte';
+  import Tabs from './Tabs.svelte';
   import WhatsappIcon from './icons/whatsapp.svg';
   import CloseIcon from './icons/close.svg';
+  import CopyIcon from './icons/copy.svg';
 
   import { products } from './products';
+  import { orderTotals } from './stores';
+
+  const TABS = ['todo', 'frutas', 'verduras'];
+  let activeTab = 'todo';
+
+  const filterProducts = (items, tab) =>
+    tab === 'todo' ? items : items.filter((p) => p.categories.includes(tab));
+
+  $: filteredProducts = filterProducts(products, activeTab);
 
   let expanded = false;
   function toggleExpanded() {
     expanded = !expanded;
+  }
+
+  function copyOrder() {
+    const text = $orderTotals.items
+      .map(
+        (item) =>
+          `${item.count} ${item.unit === 'kg' ? 'kg' : 'unidad'} ${item.product.name}`
+      )
+      .join('\n');
+    navigator.clipboard.writeText(text);
   }
 </script>
 
@@ -22,8 +43,11 @@
         <Total />
       </div>
       <div class="right">
+        <button class="header-btn" on:click={copyOrder} aria-label="Copiar pedido">
+          <CopyIcon />
+        </button>
         <button
-          class="expand"
+          class="header-btn"
           on:click={toggleExpanded}
           aria-label="Finalizar pedido"
           >{#if expanded}<CloseIcon />{:else}<WhatsappIcon />{/if}</button
@@ -38,13 +62,16 @@
     {/if}
   </div>
 
+  <Tabs tabs={TABS} {activeTab} onTabChange={(tab) => (activeTab = tab)} />
+
   <div class="bottom">
-    {#each products as product}
+    {#each filteredProducts as product (product.id)}
       <Product
         id={product.id}
         name={product.name}
         emoji={product.emoji}
         unit={product.unit}
+        season={product.season}
       />
     {/each}
   </div>
@@ -78,13 +105,15 @@
   }
 
   .right {
+    display: flex;
+    gap: 8px;
   }
 
   .details {
     padding: 10px;
   }
 
-  button.expand {
+  button.header-btn {
     background: transparent;
     border: 1px solid #fff;
     border-radius: 5px;
@@ -98,7 +127,7 @@
     margin: 0;
   }
 
-  button.expand :global(svg) {
+  button.header-btn :global(svg) {
     width: 100%;
     height: 100%;
   }

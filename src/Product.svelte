@@ -1,5 +1,4 @@
 <script>
-  import { createEventDispatcher } from "svelte";
   import { order } from "./stores";
 
   import PlusIcon from "./icons/plus.svg";
@@ -9,18 +8,36 @@
   export let name;
   export let emoji;
   export let unit;
+  export let season = [];
 
   const increment = () => order.increment(id);
   const decrement = () => order.decrement(id);
   const toggleUnit = () => order.toggleUnit(id);
 
+  const getSeasonStatus = (seasonMonths) => {
+    if (!seasonMonths || seasonMonths.length === 0) return null;
+    const currentMonth = new Date().getMonth() + 1;
+    if (seasonMonths.includes(currentMonth)) return "in-season";
+    const prevMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+    const nextMonth = currentMonth === 12 ? 1 : currentMonth + 1;
+    if (seasonMonths.includes(prevMonth) || seasonMonths.includes(nextMonth))
+      return "transitional";
+    return "out-of-season";
+  };
+
+  $: seasonStatus = getSeasonStatus(season);
   $: unit = $order[id]?.unit ?? (unit || "kg");
   $: count = $order[id]?.count ?? 0;
   $: selected = count > 0;
 </script>
 
 <div class="item">
-  <h1>{emoji} {name}</h1>
+  <h1>
+    {emoji} {name}
+    {#if seasonStatus}
+      <span class="season-indicator {seasonStatus}"></span>
+    {/if}
+  </h1>
   {#if selected}
     <button class="count" on:click={toggleUnit}>
       <div class="number">
@@ -87,5 +104,26 @@
     font-weight: normal;
     flex-grow: 1;
     line-height: 1;
+  }
+
+  .season-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  .in-season {
+    background-color: #4caf50;
+  }
+
+  .transitional {
+    background-color: #ffc107;
+  }
+
+  .out-of-season {
+    background-color: #f44336;
   }
 </style>

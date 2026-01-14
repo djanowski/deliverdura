@@ -4,6 +4,7 @@ import nodeBuiltins from 'rollup-plugin-node-builtins';
 import { svelteSVG } from 'rollup-plugin-svelte-svg';
 import css from 'rollup-plugin-css-only';
 import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 import multi from '@rollup/plugin-multi-entry';
 import svelte from 'rollup-plugin-svelte';
 
@@ -13,7 +14,7 @@ export default {
     sourcemap: true,
     format: 'cjs',
     name: 'tests',
-    file: 'build/bundle-tests.js',
+    file: 'build/bundle-tests.cjs',
   },
   plugins: [
     nodeBuiltins(),
@@ -26,8 +27,10 @@ export default {
       only: [/^svelte-/],
     }),
     css({ output: 'bundle.css' }),
+    json(),
     commonjs(),
     //nodeGlobals(),
+    //
   ],
   onwarn(warning, warn) {
     if (warning.code === 'UNRESOLVED_IMPORT') return;
