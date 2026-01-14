@@ -1,5 +1,5 @@
 <script>
-  import { slide } from 'svelte/transition';
+  import { slide, fade } from 'svelte/transition';
 
   import Product from './Product.svelte';
   import Total from './Total.svelte';
@@ -13,7 +13,7 @@
   import { products } from './products';
   import { order, orderTotals } from './stores';
 
-  const TABS = ['todo', 'frutas', 'verduras'];
+  const TABS = ['todo', 'frutas', 'verduras', 'otros'];
   let activeTab = 'todo';
 
   const filterProducts = (items, tab) =>
@@ -30,7 +30,7 @@
     const text = $orderTotals.items
       .map(
         (item) =>
-          `${item.count} ${item.unit === 'kg' ? 'kg' : 'unidad'} ${item.product.name}`
+          `${item.count} ${item.unit === 'kg' ? 'kg' : item.count === 1 ? 'unidad' : 'unidades'} ${item.product.name}`
       )
       .join('\n');
     navigator.clipboard.writeText(text);
@@ -74,17 +74,19 @@
 
   <Tabs tabs={TABS} {activeTab} onTabChange={(tab) => (activeTab = tab)} />
 
-  <div class="bottom">
-    {#each filteredProducts as product (product.id)}
-      <Product
-        id={product.id}
-        name={product.name}
-        emoji={product.emoji}
-        unit={product.unit}
-        season={product.season}
-      />
-    {/each}
-  </div>
+  {#key activeTab}
+    <div class="bottom" in:fade={{ duration: 150 }}>
+      {#each filteredProducts as product (product.id)}
+        <Product
+          id={product.id}
+          name={product.name}
+          emoji={product.emoji}
+          unit={product.unit}
+          season={product.season}
+        />
+      {/each}
+    </div>
+  {/key}
 </main>
 
 <style>

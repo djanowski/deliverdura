@@ -8,7 +8,7 @@
     const itemsText = $orderTotals.items
       .map(
         (item) =>
-          `${item.count} ${item.unit === 'kg' ? 'kg' : 'unidad'} ${
+          `${item.count} ${item.unit === 'kg' ? 'kg' : item.count === 1 ? 'unidad' : 'unidades'} ${
             item.product.name
           }`
       )

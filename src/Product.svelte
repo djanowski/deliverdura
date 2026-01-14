@@ -1,4 +1,5 @@
 <script>
+  import { fade } from "svelte/transition";
   import { order } from "./stores";
 
   import PlusIcon from "./icons/plus.svg";
@@ -41,12 +42,16 @@
   </div>
   {#if selected}
     <button class="count" on:click={toggleUnit}>
-      <span class="number">
-        {unit === "kg" ? parseFloat(count).toFixed(1) : count}
-      </span>
-      <span class="unit-label">
-        {unit === "kg" ? "kg" : "u"}
-      </span>
+      {#key unit}
+        <span class="count-content" in:fade={{ duration: 100 }}>
+          <span class="number">
+            {unit === "kg" ? parseFloat(count).toFixed(1) : count}
+          </span>
+          <span class="unit-label">
+            {unit === "kg" ? "kg" : "u"}
+          </span>
+        </span>
+      {/key}
     </button>
   {/if}
   <div class="actions">
@@ -120,6 +125,11 @@
     padding: 0 var(--space-sm);
     height: 36px;
     font-weight: 600;
+  }
+
+  .count-content {
+    display: flex;
+    align-items: center;
     gap: 2px;
   }
 
