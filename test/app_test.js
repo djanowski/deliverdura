@@ -17,7 +17,7 @@ describe('App', () => {
     let user;
     let app;
 
-    before(async () => {
+    beforeEach(async () => {
       user = userEvent.setup();
       app = render(App);
       const sendButton = app.getByRole('button', {
@@ -28,20 +28,18 @@ describe('App', () => {
 
     describe('valid number', () => {
       it('should format phone number', async () => {
-        const phoneInput = app.getByRole('textbox', { name: 'Enviar a' });
-        await user.clear(phoneInput);
-        await user.type(phoneInput, '1555295266');
-        await user.keyboard('{tab}');
+        const phoneInput = app.getByRole('textbox', { name: 'Teléfono' });
+        await fireEvent.input(phoneInput, { target: { value: '1555295266' } });
+        await fireEvent.blur(phoneInput);
         assert.equal(phoneInput.value, '1155295266');
       });
     });
 
     describe('invalid number', () => {
       it('should mark the input field as invalid', async () => {
-        const phoneInput = app.getByRole('textbox', { name: 'Enviar a' });
-        await user.clear(phoneInput);
-        await user.type(phoneInput, '1555295266');
-        await user.keyboard('{tab}');
+        const phoneInput = app.getByRole('textbox', { name: 'Teléfono' });
+        await fireEvent.input(phoneInput, { target: { value: '1555295266' } });
+        await fireEvent.blur(phoneInput);
         assert.equal(phoneInput.value, '1155295266');
       });
     });

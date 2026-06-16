@@ -1,7 +1,8 @@
 <script>
   import { orderTotals } from "./stores";
+  import { formatNumber } from "./units";
 
-  $: totalWeightKg = $orderTotals.weight.toFixed(1);
+  $: totalWeightKg = formatNumber($orderTotals.weight.toFixed(1));
   $: hasItems = $orderTotals.count > 0;
 </script>
 

@@ -10,6 +10,9 @@ import svelte from 'rollup-plugin-svelte';
 
 export default {
   input: 'test/**/*.js',
+  // jsdom drags optional native deps (canvas) and has circular CJS deps that
+  // break when bundled. Keep it external so Node loads it natively.
+  external: ['jsdom'],
   output: {
     sourcemap: true,
     format: 'cjs',
@@ -23,9 +26,7 @@ export default {
     svelteSVG({
       svgo: {},
     }),
-    resolve({
-      only: [/^svelte-/],
-    }),
+    resolve(),
     css({ output: 'bundle.css' }),
     json(),
     commonjs(),

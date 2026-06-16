@@ -1,6 +1,7 @@
 import { writable } from "svelte-local-storage-store";
 import { derived } from "svelte/store";
 import { products } from "./products";
+import { stepFor, isTogglable } from "./units";
 
 function createOrder() {
   const { subscribe, set, update } = writable("order", {
@@ -13,7 +14,7 @@ function createOrder() {
       const product = products.find((p) => p.id === id);
       const unit = order?.[id]?.unit ?? (product.unit || "kg");
       const count = order?.[id]?.count ?? 0;
-      const step = unit === "kg" ? 0.5 : 1;
+      const step = stepFor(unit);
       const newCount = Math.max(0, round(parseFloat(count) + step * value));
       return {
         ...order,
@@ -44,6 +45,7 @@ function createOrder() {
         const unitWeight = product.unitWeight;
         const currentCount = order?.[id]?.count ?? 0;
         const currentUnit = order?.[id]?.unit ?? (product.unit || "kg");
+        if (!isTogglable(currentUnit)) return order;
         const newUnit = currentUnit === "kg" ? "unit" : "kg";
         const newCount =
           newUnit === "kg"

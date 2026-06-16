@@ -1,17 +1,13 @@
 <script>
   import { order } from './stores';
   import { orderTotals } from './stores';
+  import { formatLine } from './units';
   import WhatsappIcon from './icons/whatsapp.svg';
 
   function send() {
     const phoneNumber = `54${$order.phone}`;
     const itemsText = $orderTotals.items
-      .map(
-        (item) =>
-          `${item.count} ${item.unit === 'kg' ? 'kg' : item.count === 1 ? 'unidad' : 'unidades'} ${
-            item.product.name
-          }`
-      )
+      .map((item) => formatLine(item.count, item.unit, item.product.name))
       .join('\n');
     const text = `${itemsText}\n\n${$order.notes || ''}`.trim();
     const whatsappURL = new URL(`https://api.whatsapp.com/send`);

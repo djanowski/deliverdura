@@ -1,6 +1,7 @@
 <script>
   import { fade } from "svelte/transition";
   import { order } from "./stores";
+  import { cardNumber, cardLabel, isTogglable } from "./units";
 
   import PlusIcon from "./icons/plus.svg";
   import MinusIcon from "./icons/minus.svg";
@@ -41,15 +42,15 @@
     {/if}
   </div>
   {#if selected}
-    <button class="count" on:click={toggleUnit}>
+    <button
+      class="count"
+      class:static={!isTogglable(unit)}
+      on:click={isTogglable(unit) ? toggleUnit : null}
+    >
       {#key unit}
         <span class="count-content" in:fade={{ duration: 100 }}>
-          <span class="number">
-            {unit === "kg" ? parseFloat(count).toFixed(1) : count}
-          </span>
-          <span class="unit-label">
-            {unit === "kg" ? "kg" : "u"}
-          </span>
+          <span class="number">{cardNumber(count, unit)}</span>
+          <span class="unit-label">{cardLabel(unit)}</span>
         </span>
       {/key}
     </button>
@@ -125,6 +126,10 @@
     padding: 0 var(--space-sm);
     height: 36px;
     font-weight: 600;
+  }
+
+  .count.static {
+    cursor: default;
   }
 
   .count-content {

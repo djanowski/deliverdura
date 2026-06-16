@@ -12,6 +12,7 @@
 
   import { products } from './products';
   import { order, orderTotals } from './stores';
+  import { formatLine } from './units';
 
   const TABS = ['todo', 'frutas', 'verduras', 'otros'];
   let activeTab = 'todo';
@@ -28,10 +29,7 @@
 
   function copyOrder() {
     const text = $orderTotals.items
-      .map(
-        (item) =>
-          `${item.count} ${item.unit === 'kg' ? 'kg' : item.count === 1 ? 'unidad' : 'unidades'} ${item.product.name}`
-      )
+      .map((item) => formatLine(item.count, item.unit, item.product.name))
       .join('\n');
     navigator.clipboard.writeText(text);
   }

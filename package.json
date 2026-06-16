@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "22.x"
+    "node": ">=22"
   },
   "scripts": {
     "build": "rollup -c",
@@ -14,7 +14,8 @@
   },
   "mocha": {
     "require": [
-      "svelte-test-register"
+      "svelte-test-register",
+      "./mocha.setup.cjs"
     ]
   },
   "devDependencies": {
@@ -25,7 +26,7 @@
     "@testing-library/svelte": "^3.0.3",
     "@testing-library/user-event": "^14.0.0-beta.8",
     "jsdom": "^19.0.0",
-    "mocha": "^9.1.4",
+    "mocha": "^11.7.6",
     "prettier": "^2.5.1",
     "prettier-plugin-svelte": "^2.6.0",
     "rollup": "^2.3.4",

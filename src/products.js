@@ -320,9 +320,18 @@ export const products = [
     unitWeight: 2.0,
     id: "squash",
     unit: "kg",
-    name: "Zapallo",
+    name: "Zapallo (cabutiá)",
     categories: ["verduras"],
     season: [3, 4, 5, 6, 7], // Autumn-winter
+  },
+  {
+    emoji: "🎃",
+    unitWeight: 1.2,
+    id: "butternut_squash",
+    unit: "kg",
+    name: "Calabaza (anco)",
+    categories: ["verduras"],
+    season: [3, 4, 5, 6, 7, 8], // Autumn-winter
   },
   {
     emoji: "🥬",
@@ -597,5 +606,148 @@ export const products = [
     name: "Bandeja wok",
     categories: ["otros"],
     season: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  },
+
+  // Verduras - staples
+  {
+    emoji: "🧅",
+    unitWeight: 0.15,
+    id: "scallion",
+    unit: "unit",
+    name: "Cebolla de verdeo",
+    categories: ["verduras"],
+    season: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // Year-round
+  },
+  {
+    emoji: "🍄",
+    unitWeight: 0.02,
+    id: "mushroom",
+    unit: "kg",
+    name: "Champiñón",
+    categories: ["verduras"],
+    season: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // Cultivated year-round
+  },
+  {
+    emoji: "🔴",
+    unitWeight: 0.15,
+    id: "radish",
+    unit: "unit",
+    name: "Rabanito",
+    categories: ["verduras"],
+    season: [3, 4, 5, 9, 10, 11], // Autumn & spring
+  },
+  {
+    emoji: "🫚",
+    unitWeight: 0.1,
+    id: "ginger",
+    unit: "kg",
+    name: "Jengibre",
+    categories: ["verduras"],
+    season: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // Year-round (stored)
+  },
+  {
+    emoji: "🧅",
+    unitWeight: 0.15,
+    id: "onion_red",
+    unit: "kg",
+    name: "Cebolla morada",
+    categories: ["verduras"],
+    season: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // Year-round
+  },
+  {
+    emoji: "🥬",
+    unitWeight: 0.3,
+    id: "fennel",
+    unit: "unit",
+    name: "Hinojo",
+    categories: ["verduras"],
+    season: [4, 5, 6, 7, 8, 9], // Autumn-winter-early spring
+  },
+  {
+    emoji: "⚪",
+    unitWeight: 0.15,
+    id: "turnip",
+    unit: "kg",
+    name: "Nabo",
+    categories: ["verduras"],
+    season: [4, 5, 6, 7, 8, 9], // Autumn-winter
+  },
+
+  // Frutas
+  {
+    emoji: "🟣",
+    unitWeight: 0.05,
+    id: "fig",
+    unit: "kg",
+    name: "Higo",
+    categories: ["frutas"],
+    season: [12, 1, 2, 3], // Summer
+  },
+  {
+    emoji: "🟠",
+    unitWeight: 0.2,
+    id: "persimmon",
+    unit: "kg",
+    name: "Caqui",
+    categories: ["frutas"],
+    season: [4, 5, 6], // Autumn
+  },
+  {
+    emoji: "🔴",
+    unitWeight: 0.125,
+    id: "raspberry",
+    unit: "unit",
+    name: "Frambuesa",
+    categories: ["frutas"],
+    season: [11, 12, 1, 2, 3], // Late spring-summer
+  },
+  {
+    emoji: "🟡",
+    unitWeight: 0.25,
+    id: "quince",
+    unit: "kg",
+    name: "Membrillo",
+    categories: ["frutas"],
+    season: [2, 3, 4, 5], // Autumn
+  },
+
+  // Otros - Aromáticas
+  {
+    emoji: "🌿",
+    unitWeight: 0.03,
+    id: "bay_leaf",
+    unit: "unit",
+    name: "Laurel",
+    categories: ["otros"],
+    season: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // Year-round
+  },
+  {
+    emoji: "🌿",
+    unitWeight: 0.03,
+    id: "oregano",
+    unit: "unit",
+    name: "Orégano",
+    categories: ["otros"],
+    season: [11, 12, 1, 2, 3], // Spring-summer (fresh)
+  },
+  {
+    emoji: "🌿",
+    unitWeight: 0.03,
+    id: "thyme",
+    unit: "unit",
+    name: "Tomillo",
+    categories: ["otros"],
+    season: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // Year-round
+  },
+
+  // Otros - Huevos
+  {
+    emoji: "🥚",
+    unitWeight: 0.72, // ~1 docena
+    id: "eggs",
+    unit: "docena",
+    name: "Huevos",
+    categories: ["otros"],
+    season: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // Year-round
   },
 ].sort((a, b) => a.name.localeCompare(b.name));
