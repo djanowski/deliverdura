@@ -460,6 +460,15 @@ export const products = [
     season: [3, 4, 5, 6, 7, 8], // Autumn-winter
   },
   {
+    emoji: "🍠",
+    unitWeight: 0.3,
+    id: "boniato",
+    unit: "kg",
+    name: "Boniato",
+    categories: ["verduras"],
+    season: [3, 4, 5, 6, 7, 8], // Autumn-winter
+  },
+  {
     emoji: "🟣",
     unitWeight: 0.2,
     id: "beet",
