@@ -12,6 +12,15 @@ export const products = [
     season: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // Available year-round
   },
   {
+    emoji: "🍌",
+    unitWeight: 0.2,
+    id: "plantain",
+    unit: "kg",
+    name: "Plátano",
+    categories: ["frutas"],
+    season: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // Available year-round
+  },
+  {
     emoji: "🍎",
     unitWeight: 0.195,
     id: "apple_red",
@@ -647,9 +656,9 @@ export const products = [
   },
   {
     emoji: "🫚",
-    unitWeight: 0.1,
+    unitWeight: 0.001, // sold by gram (step 50g); 1g = 0.001kg for weight total
     id: "ginger",
-    unit: "kg",
+    unit: "g",
     name: "Jengibre",
     categories: ["verduras"],
     season: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], // Year-round (stored)

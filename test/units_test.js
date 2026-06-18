@@ -26,6 +26,11 @@ describe('units formatting', () => {
       assert.equal(formatLine(2, 'docena', 'Huevos'), '2 doc. Huevos');
     });
 
+    it('formats grams as integers', () => {
+      assert.equal(formatLine(50, 'g', 'Jengibre'), '50 g Jengibre');
+      assert.equal(formatLine(100, 'g', 'Jengibre'), '100 g Jengibre');
+    });
+
     it('falls back to kg for an unknown unit', () => {
       assert.equal(formatLine(2, undefined, 'X'), '2 kg X');
     });
@@ -44,8 +49,10 @@ describe('units formatting', () => {
       assert.equal(cardNumber(2.5, 'docena'), '2½');
     });
 
-    it('keeps integers for unit', () => {
+    it('keeps integers for unit and grams', () => {
       assert.equal(cardNumber(3, 'unit'), '3');
+      assert.equal(cardNumber(50, 'g'), '50');
+      assert.equal(cardNumber(100, 'g'), '100');
     });
   });
 
@@ -54,6 +61,7 @@ describe('units formatting', () => {
       assert.equal(cardLabel('kg'), 'kg');
       assert.equal(cardLabel('unit'), 'u');
       assert.equal(cardLabel('docena'), 'doc');
+      assert.equal(cardLabel('g'), 'g');
       assert.equal(cardLabel('???'), 'kg');
     });
   });
@@ -63,6 +71,7 @@ describe('units formatting', () => {
       assert.equal(stepFor('kg'), 0.5);
       assert.equal(stepFor('unit'), 1);
       assert.equal(stepFor('docena'), 0.5);
+      assert.equal(stepFor('g'), 50);
     });
   });
 
@@ -71,6 +80,7 @@ describe('units formatting', () => {
       assert.equal(isTogglable('kg'), true);
       assert.equal(isTogglable('unit'), true);
       assert.equal(isTogglable('docena'), false);
+      assert.equal(isTogglable('g'), false);
     });
   });
 });

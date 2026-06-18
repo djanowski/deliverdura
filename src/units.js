@@ -7,6 +7,8 @@ export const units = {
   unit: { step: 1, card: "u", word: (n) => (n === 1 ? "unidad" : "unidades") },
   // "doc." abbreviation sidesteps singular/plural; counts render as ½ / 1½.
   docena: { step: 0.5, card: "doc", word: () => "doc." },
+  // Grams for small items (e.g. ginger). Not togglable, integer steps of 50.
+  g: { step: 50, card: "g", word: () => "g" },
 };
 
 const u = (unit) => units[unit] ?? units.kg;
@@ -24,10 +26,13 @@ const half = (n) => {
 
 export const stepFor = (unit) => u(unit).step;
 export const isTogglable = (unit) => unit === "kg" || unit === "unit";
-export const cardNumber = (count, unit) =>
-  unit === "docena"
-    ? half(Number(count))
-    : formatNumber(u(unit).step === 1 ? count : parseFloat(count).toFixed(1));
+export const cardNumber = (count, unit) => {
+  if (unit === "docena") return half(Number(count));
+  // Whole-number-step units (unit, g) show integers; kg keeps one decimal.
+  return formatNumber(
+    Number.isInteger(u(unit).step) ? count : parseFloat(count).toFixed(1)
+  );
+};
 export const cardLabel = (unit) => u(unit).card;
 export const formatLine = (count, unit, name) => {
   const num = unit === "docena" ? half(Number(count)) : formatNumber(count);
